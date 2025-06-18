@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Send, Menu, Sparkles, Users } from 'lucide-react';
 import { Persona } from './PersonaSelection';
 import CareerLensLogo from './CareerLensLogo';
-import { Badge } from '@/components/ui/badge';
+
 interface Message {
   id: string;
   text: string;
@@ -197,13 +197,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ persona, onToggleSidebar,
             key={message.id}
             className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
           >
-            <Card className={`max-w-xs lg:max-w-md ${
+            <Card className={`${
               message.sender === 'user' 
-                ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white' 
-                : 'bg-white shadow-sm'
+                ? 'max-w-[85%] md:max-w-[70%] lg:max-w-[60%] bg-gradient-to-r from-indigo-500 to-purple-500 text-white' 
+                : 'max-w-[85%] md:max-w-[75%] lg:max-w-[65%] bg-white shadow-sm'
             }`}>
-              <CardContent className="p-3">
-                <p className="text-sm whitespace-pre-wrap">{message.text}</p>
+              <CardContent className="p-3 md:p-4">
+                <p className="text-sm md:text-base whitespace-pre-wrap break-words">{message.text}</p>
                 <p className={`text-xs mt-2 ${
                   message.sender === 'user' ? 'text-indigo-100' : 'text-gray-500'
                 }`}>
@@ -219,8 +219,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ persona, onToggleSidebar,
         
         {isTyping && (
           <div className="flex justify-start">
-            <Card className="bg-white shadow-sm">
-              <CardContent className="p-3">
+            <Card className="bg-white shadow-sm max-w-[85%] md:max-w-[75%] lg:max-w-[65%]">
+              <CardContent className="p-3 md:p-4">
                 <div className="flex space-x-1">
                   <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                   <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
