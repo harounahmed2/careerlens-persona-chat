@@ -64,7 +64,7 @@ This hackathon project demonstrates a "Wizard of Oz" style proof-of-concept that
 ### Local Development
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/careerlens-ai.git
+git clone https://github.com/harounahmed2/careerlens-persona-chat.git
 
 # Navigate to project directory
 cd careerlens-ai
