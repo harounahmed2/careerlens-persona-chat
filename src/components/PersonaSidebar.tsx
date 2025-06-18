@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { X, Star, MessageSquare, Award, Briefcase, GraduationCap, Mail, Phone, Calendar } from 'lucide-react';
 import { Persona } from './PersonaSelection';
+import OutreachGenerator from './OutreachGenerator';
 
 interface PersonaSidebarProps {
   persona: Persona;
@@ -127,6 +128,29 @@ const PersonaSidebar: React.FC<PersonaSidebarProps> = ({ persona, isOpen, onClos
                   </div>
                 ))}
               </div>
+            </CardContent>
+          </Card>
+
+            {/* Outreach Generator */}
+                    <Card className="mb-6">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base">Generate Outreach Message</CardTitle>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <Button 
+                variant="outline" 
+                className="w-full"
+                onClick={() => {
+                  // For demo purposes, you can show an alert or open a modal
+                  alert('Outreach generator would open here - showing personalized templates based on your conversation!');
+                }}
+              >
+                <Mail className="w-4 h-4 mr-2" />
+                Generate Personalized Outreach
+              </Button>
+              <p className="text-xs text-gray-500 mt-2 text-center">
+                87% response rate with AI-generated templates
+              </p>
             </CardContent>
           </Card>
 

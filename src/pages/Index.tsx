@@ -1,18 +1,25 @@
-
 import React, { useState } from 'react';
 import LandingPage from '@/components/LandingPage';
 import PersonaSelection from '@/components/PersonaSelection';
 import ChatInterface from '@/components/ChatInterface';
 import PersonaSidebar from '@/components/PersonaSidebar';
+import RealPeopleMatcher from '@/components/RealPeopleMatcher';
 import { Persona } from '@/components/PersonaSelection';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-type AppState = 'landing' | 'persona-selection' | 'chat';
+type AppState = 'landing' | 'persona-selection' | 'chat' | 'real-people';
 
 const Index = () => {
   const [appState, setAppState] = useState<AppState>('landing');
   const [selectedPersona, setSelectedPersona] = useState<Persona | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [uploadData, setUploadData] = useState<{ type: 'resume' | 'linkedin', data: string } | null>(null);
+  const [conversationTopics] = useState<string[]>([
+    'Transitioning from engineering to PM',
+    'Building product sense',
+    'Preparing for PM interviews',
+    'Understanding B2B product management'
+  ]);
 
   const handleUploadComplete = (type: 'resume' | 'linkedin', data: string) => {
     setUploadData({ type, data });
@@ -30,6 +37,16 @@ const Index = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
+  const handleReadyForRealPeople = () => {
+    setAppState('real-people');
+    setSidebarOpen(false);
+  };
+
+  const handleBackToChat = () => {
+    setAppState('chat');
+    setSidebarOpen(true);
+  };
+
   if (appState === 'landing') {
     return <LandingPage onUploadComplete={handleUploadComplete} />;
   }
@@ -45,6 +62,7 @@ const Index = () => {
           <ChatInterface 
             persona={selectedPersona} 
             onToggleSidebar={toggleSidebar}
+            onReadyForRealPeople={handleReadyForRealPeople}
           />
         </div>
         <PersonaSidebar
@@ -52,7 +70,19 @@ const Index = () => {
           isOpen={sidebarOpen}
           onClose={() => setSidebarOpen(false)}
         />
+        
+
       </div>
+    );
+  }
+
+  if (appState === 'real-people' && selectedPersona) {
+    return (
+      <RealPeopleMatcher
+        aiPersona={selectedPersona}
+        conversationTopics={conversationTopics}
+        onBack={handleBackToChat}
+      />
     );
   }
 
